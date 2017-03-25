@@ -1,52 +1,7 @@
----
+- include: install.yml
+  tags:
+    - install
 
-- name: Create docker group
-  group:
-    name: docker
-    state: present
-    system: yes
-  register: docker_group_created
-
-- name: Create docker user
-  user:
-    home: /home/docker
-    name: docker
-    group: docker
-    system: yes
-  when: docker_group_created|changed
-
-- name: Remove old docker installs
-  apt:
-    name: "{{ item }}"
-    state: absent
-  with_items:
-    - docker-engine
-    - docker
-
-- name: Update apt cache
-  apt:
-    update_cache: yes
-
-- name: Install dependencies
-  apt:
-    name: "{{ item }}"
-    state: present
-  with_items:
-    - apt-transport-https
-    - ca-certificates
-    - software-properties-common
-
-- name: Add Docker repo key
-  apt_key:
-    url: 'https://download.docker.com/linux/ubuntu/gpg'
-    state: present
-
-- name: Add Docker repo
-  apt_repository:
-    repo: "deb https://download.docker.com/linux/ubuntu {{ hostvars[inventory_hostname]['ansible_distribution_release'] }} stable"
-
-- name: Install Docker
-  apt:
-    name: "docker-ce"
-    state: present
-    update_cache: yes
+- include: service.yml
+  tags:
+    - service
