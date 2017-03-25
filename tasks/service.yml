@@ -1,3 +1,3 @@
 ---
 - name: Manage Docker Service
-  service: name=docker state={{ docker.service_state }}
+  service: name=docker state={{ docker.service_state }} enabled=yes
