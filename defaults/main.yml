@@ -1,4 +1,0 @@
-docker:
-  group: docker
-  user: docker
-  home: /home/docker

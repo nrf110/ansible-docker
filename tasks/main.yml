@@ -2,16 +2,16 @@
 
 - name: Create docker group
   group:
-    name: "{{ docker.group }}"
+    name: docker
     state: present
     system: yes
   register: docker_group_created
 
 - name: Create docker user
   user:
-    home: "{{ docker.home }}"
-    name: "{{ docker.user }}"
-    group: "{{ docker.group }}"
+    home: /home/docker
+    name: docker
+    group: docker
     system: yes
   when: docker_group_created|changed
 
