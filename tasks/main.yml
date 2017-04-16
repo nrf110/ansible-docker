@@ -1,7 +1,5 @@
 - include: install.yml
-  tags:
-    - install
+  tags: [install]
 
 - include: service.yml
-  tags:
-    - service
+  tags: [service]
